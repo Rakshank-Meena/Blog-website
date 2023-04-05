@@ -1,3 +1,6 @@
+This is the frontend Code for the advanced blog application. It connects to a nodejs Backend and a mongoose database. users can post blogs and can edit later on. they can also comment on other blogs. Admin can edit all blogs and can even delete blogs.
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
