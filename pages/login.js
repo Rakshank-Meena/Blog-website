@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-// const {default:CustomButton} = require("./components/customButton")
-import CustomButton from './Components/CustomButton'
+// const {default:CustomButton} = require("./Components/customButton")
+import CustomButton from '../Components/CustomButton'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 const LoggedIn = () => {
@@ -14,7 +14,7 @@ const LoggedIn = () => {
   }
   const handleSubmit = async () => {
 
-    await axios.post('http://localhost:5000/login', data, {
+    await axios.post('https://blog-backend-nhou.onrender.com/login', data, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     }).then((res) => {

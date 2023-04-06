@@ -28,7 +28,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/Components/BlogInput.js"
+    "Components/BlogInput.js"
   ],
   "exclude": [
     "node_modules"

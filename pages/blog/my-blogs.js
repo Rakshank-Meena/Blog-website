@@ -1,7 +1,7 @@
 import axios from 'axios'
-import Navbar from '../Components/Navbar'
+import Navbar from '../../Components/Navbar'
 
-import BlogList from "../Components/BlogList"
+import BlogList from "../../Components/BlogList"
 import { useEffect, useState } from 'react'
 
 const MyBlog = (props) => {
@@ -9,7 +9,7 @@ const MyBlog = (props) => {
     useEffect(() => {
         if (localStorage.getItem("_uud")) {
             const userData = JSON.parse(localStorage.getItem("_uud"))
-            axios.get('http://localhost:5000/my-blogs', {
+            axios.get('https://blog-backend-nhou.onrender.com/my-blogs', {
                 headers: {
                     "content-type": "application/json"
                 },

@@ -1,6 +1,6 @@
 import axios from 'axios'
-import Navbar from '../Components/Navbar'
-import BlogList from "../Components/BlogList"
+import Navbar from '../../Components/Navbar'
+import BlogList from "../../Components/BlogList"
 
 
 const BlogListing = (props) => {
@@ -22,7 +22,7 @@ const BlogListing = (props) => {
 
 export async function getServerSideProps(context) {
     let blogs
-    await axios.get('http://localhost:5000/blogs', {
+    await axios.get('https://blog-backend-nhou.onrender.com/blogs', {
         headers: {
             "content-type": "application/json"
         }

@@ -1,7 +1,6 @@
 
 
 const Comments = (props) => {
-    // const { CommentsArr } = props
     return (
         <div className="px-2">
             {props.CommentsArr.map((item,i)=>(

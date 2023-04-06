@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import CustomButton from "./components/CustomButton"
+import CustomButton from "../Components/CustomButton"
 import { useRouter } from 'next/router'
 
 
@@ -21,7 +21,7 @@ const Signup = () => {
     reqType: "signup"
   }
   const handleSubmit = async () => {
-    await axios.post('http://localhost:5000/login', data, {
+    await axios.post('https://blog-backend-nhou.onrender.com/login', data, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     }).then((res) => {
@@ -30,11 +30,11 @@ const Signup = () => {
         _patk: res.data._patk
       }
       localStorage.setItem("_uud", JSON.stringify(item), new Date(Date.now() + 2892000000)),
-      router.push('/blog/blogs')
+        router.push('/blog/blogs')
     }).catch((e) => { console.log(e) })
   }
   useEffect(() => {
-    localStorage.getItem("_uud")  && router.push('/blog/blogs')
+    localStorage.getItem("_uud") && router.push('/blog/blogs')
   }, [])
 
   return (

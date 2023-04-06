@@ -12,12 +12,12 @@ const Layout = () => {
     }
     const handleFormSubmit = async () => {
         if (blogTitle !== '' && content !== '') {
-            await axios.post('http://localhost:5000/blogs', payload, {
+            await axios.post('https://blog-backend-nhou.onrender.com/blogs', payload, {
                 headers: {
                     "content-type": "application/json",
                 },
                 withCredentials: true,
-            }).then((res) => { return(alert('blog posted successfully'),setBlogTitle(''),setContent(''),router.push("/blog/blogs")) }).catch((err) => { alert(err) })
+            }).then((res) => { return (alert('blog posted successfully'), setBlogTitle(''), setContent(''), router.push("/blog/blogs")) }).catch((err) => { alert(err) })
         }
     }
 
