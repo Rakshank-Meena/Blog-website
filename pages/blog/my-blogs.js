@@ -9,7 +9,7 @@ const MyBlog = (props) => {
     useEffect(() => {
         if (localStorage.getItem("_uud")) {
             const userData = JSON.parse(localStorage.getItem("_uud"))
-            axios.get('https://blog-backend-nhou.onrender.com/my-blogs', {
+            axios.get('http://localhost:5000/my-blogs', {
                 headers: {
                     "content-type": "application/json"
                 },

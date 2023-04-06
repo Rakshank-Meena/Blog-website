@@ -22,7 +22,7 @@ const BlogListing = (props) => {
 
 export async function getServerSideProps(context) {
     let blogs
-    await axios.get('https://blog-backend-nhou.onrender.com/blogs', {
+    await axios.get('http://localhost:5000/blogs', {
         headers: {
             "content-type": "application/json"
         }

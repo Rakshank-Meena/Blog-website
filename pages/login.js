@@ -14,7 +14,7 @@ const LoggedIn = () => {
   }
   const handleSubmit = async () => {
 
-    await axios.post('https://blog-backend-nhou.onrender.com/login', data, {
+    await axios.post('http://localhost:5000/login', data, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     }).then((res) => {

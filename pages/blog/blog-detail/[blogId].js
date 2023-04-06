@@ -29,7 +29,7 @@ const BlogDetail = (props) => {
             return setEdit(true)
         }
         const data = { title: blogTitle, content: blogContent, blogId: props.blogs.blogId, email: props.blogs.email, type: "content" }
-        await axios.patch('https://blog-backend-nhou.onrender.com/blogs', data, { headers: { 'Content-Type': 'application/json' }, withCredentials: true }).then((res) => {
+        await axios.patch('http://localhost:5000/blogs', data, { headers: { 'Content-Type': 'application/json' }, withCredentials: true }).then((res) => {
             alert('success'), setEdit(true)
         }).catch((err) => { alert('failed') })
     }
@@ -38,12 +38,12 @@ const BlogDetail = (props) => {
             return
         }
         const data = { blogId: props.blogs.blogId, email: props.blogs.email, type: "comment", comment }
-        await axios.patch('https://blog-backend-nhou.onrender.com/blogs', data, { headers: { 'Content-Type': 'application/json' }, withCredentials: true }).then((res) => {
+        await axios.patch('http://localhost:5000/blogs', data, { headers: { 'Content-Type': 'application/json' }, withCredentials: true }).then((res) => {
             alert('comment posted successfully'), setEdit(true), setComment('')
         }).catch((err) => { alert('failed') })
     }
     const handleDelete = () => {
-        window.confirm("are you sure you want to delete this blog permanently") ? axios.delete(`https://blog-backend-nhou.onrender.com/blogs`, {
+        window.confirm("are you sure you want to delete this blog permanently") ? axios.delete(`http://localhost:5000/blogs`, {
             headers: {
                 "content-type": "application/json"
             },
@@ -104,7 +104,7 @@ export async function getServerSideProps(context) {
     const id = await params.blogId
     let blogs
     try {
-        await axios.get(`https://blog-backend-nhou.onrender.com/blogs`, {
+        await axios.get(`http://localhost:5000/blogs`, {
             headers: {
                 "content-type": "application/json"
             },
