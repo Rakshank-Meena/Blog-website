@@ -1,12 +1,10 @@
 import Link from 'next/link'
-import Navbar from '../Components/Navbar'
 
 
 export default function Home() {
 
   return (
     <div>
-      <Navbar />
       <div className="flex flex-col justify-center h-auto mt-[40px] py-[60px] bg-bannerGreen px-10 ">
 
 

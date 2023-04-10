@@ -1,12 +1,11 @@
 import axios from 'axios'
-import Navbar from '../../Components/Navbar'
-import BlogList from "../../Components/BlogList"
+import dynamic from "next/dynamic"
+const BlogList=dynamic(()=>import( '../../Components/BlogList'))
 
 
-const BlogListing = (props) => {
+const BlogListing = async (props) => {
     return (
         <div className=''>
-            <Navbar />
             <div className=" w-full sm:px-20 mt-[100px] bg-bannerGreen">
                 <div className='text-2xl font-semibold px-8 sm:px-40 my-10'>Blogs</div>
                 {props.blogs && props.blogs.map((item, index) => {
@@ -22,7 +21,7 @@ const BlogListing = (props) => {
 
 export async function getServerSideProps(context) {
     let blogs
-    await axios.get('http://localhost:5000/blogs', {
+    await axios.get('https://blog-backend-nhou.onrender.com/blogs', {
         headers: {
             "content-type": "application/json"
         }

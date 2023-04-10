@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import Navbar from '../../../Components/Navbar'
-import CustomButton from '../../../Components/CustomButton'
+import dynamic from 'next/dynamic'
+const CustomButton = dynamic(()=>import('../../../Components/CustomButton'))
 import { useRouter } from 'next/router'
-import Comments from '../../../Components/Comments'
+const Comments = dynamic(()=>import('../../../Components/Comments'))
 
 const BlogDetail = (props) => {
     const router = useRouter()
@@ -29,7 +29,7 @@ const BlogDetail = (props) => {
             return setEdit(true)
         }
         const data = { title: blogTitle, content: blogContent, blogId: props.blogs.blogId, email: props.blogs.email, type: "content" }
-        await axios.patch('http://localhost:5000/blogs', data, { headers: { 'Content-Type': 'application/json' }, withCredentials: true }).then((res) => {
+        await axios.patch('https://blog-backend-nhou.onrender.com/blogs', data, { headers: { 'Content-Type': 'application/json' }, withCredentials: true }).then((res) => {
             alert('success'), setEdit(true)
         }).catch((err) => { alert('failed') })
     }
@@ -38,12 +38,12 @@ const BlogDetail = (props) => {
             return
         }
         const data = { blogId: props.blogs.blogId, email: props.blogs.email, type: "comment", comment }
-        await axios.patch('http://localhost:5000/blogs', data, { headers: { 'Content-Type': 'application/json' }, withCredentials: true }).then((res) => {
+        await axios.patch('https://blog-backend-nhou.onrender.com/blogs', data, { headers: { 'Content-Type': 'application/json' }, withCredentials: true }).then((res) => {
             alert('comment posted successfully'), setEdit(true), setComment('')
         }).catch((err) => { alert('failed') })
     }
     const handleDelete = () => {
-        window.confirm("are you sure you want to delete this blog permanently") ? axios.delete(`http://localhost:5000/blogs`, {
+        window.confirm("are you sure you want to delete this blog permanently") ? axios.delete(`https://blog-backend-nhou.onrender.com/blogs`, {
             headers: {
                 "content-type": "application/json"
             },
@@ -55,7 +55,6 @@ const BlogDetail = (props) => {
     }
     return (
         <>
-            <Navbar />
             <div className="w-auto h-auto bg-white sm:mx-40 rounded-md sm:px-5 px-5 py-4 mx-10 mt-[100px] flex flex-col gap-4">
                 {(!editAccess && !edit) && <div className='flex w-full justify-end gap-2 items-center'>
                     <div onClick={handleEdit}>
@@ -104,7 +103,7 @@ export async function getServerSideProps(context) {
     const id = await params.blogId
     let blogs
     try {
-        await axios.get(`http://localhost:5000/blogs`, {
+        await axios.get(`https://blog-backend-nhou.onrender.com/blogs`, {
             headers: {
                 "content-type": "application/json"
             },

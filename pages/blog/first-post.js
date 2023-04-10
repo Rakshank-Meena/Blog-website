@@ -1,9 +1,9 @@
-import Layout from "../../Components/BlogInput.js";
-import Navbar from "../../Components/Navbar.js";
+import dynamic from "next/dynamic";
+const Layout=dynamic(()=>import("../../Components/BlogInput.js"))
+
 
 export default function FirstPost() {
   return (<>
-    <Navbar />
     <Layout />
   </>)
 }
