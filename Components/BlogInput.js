@@ -12,7 +12,7 @@ const Layout = () => {
     }
     const handleFormSubmit = async () => {
         if (blogTitle !== '' && content !== '') {
-            await axios.post('https://blog-backend-nhou.onrender.com/blogs', payload, {
+            await axios.post('http://localhost:5000/blogs', payload, {
                 headers: {
                     "content-type": "application/json",
                 },

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
-const CustomButton =dynamic(()=>import( "../Components/CustomButton"))
+const CustomButton = dynamic(() => import("../Components/CustomButton"))
 import { useRouter } from 'next/router'
 
 
@@ -22,7 +22,7 @@ const Signup = () => {
     reqType: "signup"
   }
   const handleSubmit = async () => {
-    await axios.post('https://blog-backend-nhou.onrender.com/login', data, {
+    await axios.post('http://localhost:5000/login', data, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     }).then((res) => {

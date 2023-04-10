@@ -13,7 +13,7 @@ const Navbar = (props) => {
     const [hamburger, setHamburger] = useState(false)
     useEffect(() => {
         localStorage.getItem("_uud") && setSignupCta('sign out')
-        axios.get('https://blog-backend-nhou.onrender.com/blogs', {
+        axios.get('http://localhost:5000/blogs', {
             headers: {
                 "content-type": "application/json"
             }

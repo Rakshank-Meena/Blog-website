@@ -1,6 +1,6 @@
 import axios from 'axios'
 import dynamic from "next/dynamic"
-const BlogList=dynamic(()=>import( '../../Components/BlogList'))
+const BlogList = dynamic(() => import('../../Components/BlogList'))
 
 
 const BlogListing = async (props) => {
@@ -21,7 +21,7 @@ const BlogListing = async (props) => {
 
 export async function getServerSideProps(context) {
     let blogs
-    await axios.get('https://blog-backend-nhou.onrender.com/blogs', {
+    await axios.get('http://localhost:5000/blogs', {
         headers: {
             "content-type": "application/json"
         }
