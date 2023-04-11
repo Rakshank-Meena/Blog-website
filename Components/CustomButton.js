@@ -1,11 +1,11 @@
 const CustomButton=(props)=>{
     const {type,text,classes}=props
     return(type==='primary'?(
-        <button className={`text-primaryCtaColor capitalize text-[18px] border-primaryCtaColor border shadow-lg rounded-md bg-primaryCta px-[10px] py-[5px] ${classes}`}>
+        <button className={`bg-primary text-sm md:text-base uppercase hover:bg-linkHover text-white font-bold py-2 px-4 rounded-full md:rounded  ${classes}`}>
             {text}
         </button>
     ):(
-        <button className={`text-secondaryCtaColor capitalize text-[18px] border-primaryCtaColor border shadow-lg rounded-md bg-secondaryCta px-[10px] py-[5px] ${classes}`}>
+        <button className={`bg-secondary text-sm md:text-base uppercase hover:bg-linkHover text-white font-bold py-2 px-4 rounded-full md:rounded ${classes}`}>
             {text}
         </button>
     ))

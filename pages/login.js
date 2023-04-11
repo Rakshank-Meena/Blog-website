@@ -14,7 +14,7 @@ const LoggedIn = () => {
   }
   const handleSubmit = async () => {
 
-    await axios.post('http://localhost:5000/login', data, {
+    await axios.post('https://blog-backend-nhou.onrender.com/login', data, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     }).then((res) => {
@@ -32,15 +32,49 @@ const LoggedIn = () => {
   }, [])
 
   return (
-    <div className='h-screen w-screen flex flex-col justify-center gap-7 items-center bg-lime-900'>
-      <div className='w-[70%] h-1/2 border shadow-md flex flex-col p-[16px] justify-between items-center bg-white rounded-lg pb-[20px]' >
-        <div className='text-[21px] font-semibold text-cyan-900'>Please Login To Continue</div>
-        <input className='bg-lime-50 px-2 h-[40px] w-[80%] rounded-md border border-slate-500' type='email' placeholder='Please Your Email here' onChange={(e) => { setEmail(e.target.value) }}></input>
-        <input className='bg-lime-50 px-2 h-[40px] w-[80%] rounded-md  border border-slate-500' type='password' placeholder='Your Password' onChange={(e) => { setPassword(e.target.value) }}></input>
-        <div onClick={handleSubmit}><CustomButton classes={'mb-3 font-semibold uppercase py-1'} type={'primary'} text={'submit'} /></div>
+    <div className="bg-white min-h-screen flex items-center justify-center">
+      <div className="bg-white w-full max-w-sm p-8 rounded-lg shadow-md">
+        <h1 className="text-primary text-2xl font-bold mb-8 text-center">Sign In</h1>
 
+        <div className="mb-4">
+          <label htmlFor="email" className="text-neutral3 block mb-2">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            className="w-full border border-neutral1 rounded-md py-2 px-3 text-sm focus:outline-none"
+            placeholder="Your email"
+            onChange={(e) => { setEmail(e.target.value) }}
+            value={email}
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="password" className="text-neutral3 block mb-2">
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            className="w-full border border-neutral1 rounded-md py-2 px-3 text-sm focus:outline-none"
+            placeholder="Your password"
+            onChange={(e) => { setPassword(e.target.value) }}
+            value={password}
+          />
+        </div>
+        <button
+          onClick={handleSubmit}
+          className="w-full bg-primary text-white font-bold py-2 px-4 rounded-md text-center hover:bg-secondary transition-colors duration-300"
+        >
+          Sign In
+        </button>
+        <p className="mt-4 text-center">
+          Don't have an account?{' '}
+          <Link href="/signup" className="text-link hover:text-linkHover font-bold">
+            Sign Up
+          </Link>
+        </p>
       </div>
-      <Link href={"/signup"}><div className='uppercase text-white drop-shadow-lg shadow-black flex flex-col gap-2 items-center'>dont have an account yet?? <CustomButton classes={'font-semibold py-1 px-2'} type={'primary'} text={'Sign up'} /></div></Link>
     </div>
   )
 }

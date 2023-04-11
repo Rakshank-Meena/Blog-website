@@ -1,18 +1,24 @@
 import { useRouter } from 'next/router'
 const SearchList = (props) => {
-    const router=useRouter()
     return (
-        <div>
+        <>
             {props.array.map((item, i) => {
                 return (
-                    <a key={`search${i}`} href={`/blog/blog-detail/${item.blogId}`}><div className='capitalize my-1 font-semibold text-md text-primaryTxt bg-stone-100 border rounded-md shadow-lg px-1 py-[2px]' >
-                        {item.title}
-                    </div></a>
+                    <ul className="text-default">
+                        <li
+                            key={`search${i}`}
+                            className="px-4 py-2 cursor-pointer hover:bg-gray-100 border-t-2 mt-1  lg:border-none"
+                        >
+                            <a href={`/blog/blog-detail/${item.blogId}`}>
+                                {item.title}
+                            </a>
+                        </li>
+                    </ul>
                 )
 
             })}
 
-        </div>
+        </>
     )
 }
 

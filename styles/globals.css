@@ -7,17 +7,13 @@
   margin: 0;
 }
 
-html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   min-height: 100vh;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: #d8eacc;
-}
 
 a {
   color: inherit;
@@ -27,9 +23,3 @@ a {
   outline: none;
 }
 
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: light;
-  }
-}

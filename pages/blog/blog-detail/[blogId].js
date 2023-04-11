@@ -29,7 +29,7 @@ const BlogDetail = (props) => {
             return setEdit(true)
         }
         const data = { title: blogTitle, content: blogContent, blogId: props.blogs.blogId, email: props.blogs.email, type: "content" }
-        await axios.patch('http://localhost:5000/blogs', data, { headers: { 'Content-Type': 'application/json' }, withCredentials: true }).then((res) => {
+        await axios.patch('https://blog-backend-nhou.onrender.com/blogs', data, { headers: { 'Content-Type': 'application/json' }, withCredentials: true }).then((res) => {
             alert('success'), setEdit(true)
         }).catch((err) => { alert('failed') })
     }
@@ -38,12 +38,12 @@ const BlogDetail = (props) => {
             return
         }
         const data = { blogId: props.blogs.blogId, email: props.blogs.email, type: "comment", comment }
-        await axios.patch('http://localhost:5000/blogs', data, { headers: { 'Content-Type': 'application/json' }, withCredentials: true }).then((res) => {
+        await axios.patch('https://blog-backend-nhou.onrender.com/blogs', data, { headers: { 'Content-Type': 'application/json' }, withCredentials: true }).then((res) => {
             alert('comment posted successfully'), setEdit(true), setComment('')
         }).catch((err) => { alert('failed') })
     }
     const handleDelete = () => {
-        window.confirm("are you sure you want to delete this blog permanently") ? axios.delete(`http://localhost:5000/blogs`, {
+        window.confirm("are you sure you want to delete this blog permanently") ? axios.delete(`https://blog-backend-nhou.onrender.com/blogs`, {
             headers: {
                 "content-type": "application/json"
             },
@@ -55,34 +55,55 @@ const BlogDetail = (props) => {
     }
     return (
         <>
-            <div className="w-auto h-auto bg-white sm:mx-40 rounded-md sm:px-5 px-5 py-4 mx-10 mt-[100px] flex flex-col gap-4">
-                {(!editAccess && !edit) && <div className='flex w-full justify-end gap-2 items-center'>
-                    <div onClick={handleEdit}>
-                        <CustomButton classes={''} type={'primary'} text={'save'} />
+            <div className="container mx-auto mt-8 lg:px-10">
+                {(!editAccess && !edit) &&
+                    <div className='flex w-full justify-end gap-2 items-center'>
+                        <div onClick={handleEdit}>
+                            <CustomButton classes={''} type={'primary'} text={'save'} />
+                        </div>
+                        <div onClick={() => setEdit(!edit)}>
+                            <CustomButton classes={''} type={'secondary'} text={'cancel'} />
+                        </div>
+                        <div className='ml-4 text-red-900' onClick={handleDelete}>
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                height="2em"
+                                width="2em"
+                                {...props}
+                            >
+                                <path d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 002 2h8a2 2 0 002-2V7H6v12z" />
+                            </svg>
+                        </div>
                     </div>
-                    <div onClick={() => setEdit(!edit)}>
-                        <CustomButton classes={''} type={'secondary'} text={'cancel'} />
-                    </div>
-                    <div className='ml-4 text-red-900' onClick={handleDelete}>
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            height="2em"
-                            width="2em"
-                            {...props}
-                        >
-                            <path d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 002 2h8a2 2 0 002-2V7H6v12z" />
-                        </svg>
-                    </div>
-                </div>}
+                }
 
-                {edit ? <h1 className={`text-[26px] font-bold uppercase `}>{blogTitle}</h1> : <input type='text' readOnly={edit} className={`text-[21px] font-bold uppercase border border-primaryCtaColor bg-stone-300 px-3 rounded-lg shadow-sm shadow-black`} value={blogTitle} onChange={(e) => setBlogTitle(e.target.value)} />}
-                <div className=" flex justify-between text-[16px] font-semibold text-gray-600">{author}{editAccess == false && <button className='text-blue-900' onClick={() => !editAccess && setEdit(!edit)}>Edit</button>}</div>
-                <section className="text-[18px] h-auto w-full  flex flex-wrap break-words whitespace-pre-wrap">
-                    {edit ? <p className="text-[18px] h-auto w-full"
-                        dangerouslySetInnerHTML={{ __html: blogContent }}
-                    >
-                    </p> : <textarea className='w-full min-h-[40vh] px-3 py-2 border border-primaryCtaColor bg-stone-300  rounded-lg shadow-sm shadow-black' value={blogContent} onChange={(e) => setBlog(e.target.value)} />}
+                {edit ?
+                    <h1 className={`text-3xl font-bold mb-8 px-8 `}>{blogTitle}</h1>
+                    :
+                    <div className=' mb-8 px-8 '>
+                        <label className="block font-bold mb-2">Edit your Title</label>
+                        <input type='text' readOnly={edit} className={`w-full  border-neutral1 border-2 rounded-md px-4 py-2 `} value={blogTitle} onChange={(e) => setBlogTitle(e.target.value)} />
+                    </div>
+                }
+                <div className=" flex justify-between px-8 items-center">
+                    <p className="text-neutral2 capitalize ">{author}</p>
+                    {editAccess == false && <button className='text-blue-900' onClick={() => !editAccess && setEdit(!edit)}>Edit</button>}
+                </div>
+                <section className="bg-white rounded-lg p-8 ">
+                    {edit ?
+                        <div className="prose max-w-none break-words whitespace-pre-wrap">
+                            <p
+                                dangerouslySetInnerHTML={{ __html: blogContent }}
+                            >
+                            </p>
+                        </div>
+                        :
+                        <>
+                            <label className="block font-bold mb-2">Edit Your Content</label>
+                            <textarea rows="8" className='w-full border-2 border-neutral1 rounded-md px-4 py-2' value={blogContent} onChange={(e) => setBlog(e.target.value)} />
+                        </>
+                    }
                 </section>
             </div>
             <div className=" w-auto flex flex-col sm:mx-40 mx-10 px-2 mt-2 py-5 rounded-xl bg-emerald-50">
@@ -103,7 +124,7 @@ export async function getServerSideProps(context) {
     const id = await params.blogId
     let blogs
     try {
-        await axios.get(`http://localhost:5000/blogs`, {
+        await axios.get(`https://blog-backend-nhou.onrender.com/blogs`, {
             headers: {
                 "content-type": "application/json"
             },

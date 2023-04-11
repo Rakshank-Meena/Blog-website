@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 const CustomButton = dynamic(() => import("../Components/CustomButton"))
 import { useRouter } from 'next/router'
-
+import Link from 'next/link'
 
 const Signup = () => {
   const router = useRouter()
@@ -22,7 +22,7 @@ const Signup = () => {
     reqType: "signup"
   }
   const handleSubmit = async () => {
-    await axios.post('http://localhost:5000/login', data, {
+    await axios.post('https://blog-backend-nhou.onrender.com/login', data, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     }).then((res) => {
@@ -39,15 +39,71 @@ const Signup = () => {
   }, [])
 
   return (
-    <div className='h-screen w-screen flex justify-center items-center bg-lime-900'>
-      <div className='w-[70%] h-1/2 border shadow-md flex flex-col p-[16px] justify-between items-center bg-white rounded-lg pb-[20px]' >
-        <div className='text-[21px] font-semibold text-cyan-900'>Sign Up</div>
-        <input className='bg-lime-50 px-2 h-[40px] w-[80%] rounded-md border border-slate-500' type='email' placeholder='Please Your Email here' onChange={(e) => { setEmail(e.target.value) }}></input>
-        <input className='bg-lime-50 px-2 h-[40px] w-[80%] rounded-md border border-slate-500' type='text' placeholder='set a username' onChange={(e) => { setUserName(e.target.value) }}></input>
-        <input className='bg-lime-50 px-2 h-[40px] w-[80%] rounded-md  border border-slate-500' type='password' placeholder='Your Password' onChange={(e) => { setPassword(e.target.value) }}></input>
-        <input className='bg-lime-50 px-2 h-[40px] w-[80%] rounded-md  border border-slate-500' type='password' placeholder='confirm your password' onChange={(e) => { setCPassword(e.target.value) }}></input>
-        <div onClick={handleSubmit}><CustomButton classes={'mb-3 font-semibold uppercase py-1'} type={'primary'} text={'submit'} /></div>
-
+    <div className="bg-white min-h-screen flex items-center justify-center">
+      <div className="bg-white w-full max-w-sm p-8 rounded-lg shadow-md">
+        <h1 className="text-primary text-2xl font-bold mb-8 text-center">Sign Up</h1>
+        <div>
+          <div className="mb-4">
+            <label htmlFor="email" className="text-neutral3 block mb-2">
+              Email
+            </label>
+            <input
+              onChange={(e) => { setEmail(e.target.value) }}
+              type="email"
+              id="email"
+              className="w-full border border-neutral1 rounded-md py-2 px-3 text-sm focus:outline-none"
+              placeholder="Your email"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="username" className="text-neutral3 block mb-2">
+              Username
+            </label>
+            <input
+              onChange={(e) => { setUserName(e.target.value) }}
+              type="text"
+              id="username"
+              className="w-full border border-neutral1 rounded-md py-2 px-3 text-sm focus:outline-none"
+              placeholder="Your username"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="password" className="text-neutral3 block mb-2">
+              Password
+            </label>
+            <input
+              onChange={(e) => { setPassword(e.target.value) }}
+              type="password"
+              id="password"
+              className="w-full border border-neutral1 rounded-md py-2 px-3 text-sm focus:outline-none"
+              placeholder="Your password"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="confirmPassword" className="text-neutral3 block mb-2">
+              Confirm Password
+            </label>
+            <input
+              onChange={(e) => { setCPassword(e.target.value) }}
+              type="password"
+              id="confirmPassword"
+              className="w-full border border-neutral1 rounded-md py-2 px-3 text-sm focus:outline-none"
+              placeholder="Confirm password"
+            />
+          </div>
+          <button
+            onClick={handleSubmit}
+            className="w-full bg-primary text-white font-bold py-2 px-4 rounded-md text-center hover:bg-secondary transition-colors duration-300"
+          >
+            Sign Up
+          </button>
+        </div>
+        <p className="mt-4 text-center">
+          Already have an account?
+          <Link href="/login" className="text-link hovertext-linkHover font-bold">
+            Sign In
+          </Link>
+        </p>
       </div>
     </div>
   )
