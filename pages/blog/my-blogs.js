@@ -1,9 +1,10 @@
 import axios from 'axios'
 import dynamic from 'next/dynamic'
-const BlogList = dynamic(() => import("../../Components/BlogList"))
-const Nothing = dynamic(() => import("../../Components/NothingError"))
+const LazyLoader = dynamic(() => import('../../components/LazyLoader'), { ssr: false })
+const BlogList = dynamic(() => import("../../components/BlogList"), { ssr: false, loading: () => <LazyLoader /> })
+const Nothing = dynamic(() => import("../../components/NothingError"))
 import { useEffect, useState } from 'react'
-
+import NoSSR from '../../components/SSRDisable'
 const MyBlog = (props) => {
     const [blogs, setBlogs] = useState([])
     useEffect(() => {
@@ -20,7 +21,7 @@ const MyBlog = (props) => {
         }
     }, [])
     return (
-        <>
+        <NoSSR>
             <div className='container mx-auto px-4 py-8 lg:max-w-[62rem] '>
                 <h1 className="text-4xl font-bold text-gray-800 mb-8">Your Blogs</h1>
                 {blogs[0] ?
@@ -39,7 +40,7 @@ const MyBlog = (props) => {
                         </div>
                     )}
             </div>
-        </>
+        </NoSSR>
     )
 }
 

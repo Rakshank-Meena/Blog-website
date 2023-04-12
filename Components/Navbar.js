@@ -44,6 +44,7 @@ const Navbar = (props) => {
     }
     const handleSignin = () => {
         localStorage.getItem("_uud") ? (localStorage.removeItem("_uud"), setSignupCta('sign in')) : router.push("/login")
+        setHamburger(false)
     }
     return (
         <>

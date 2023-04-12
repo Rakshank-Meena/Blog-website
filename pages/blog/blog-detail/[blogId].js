@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import dynamic from 'next/dynamic'
-const CustomButton = dynamic(() => import('../../../Components/CustomButton'))
+const CustomButton = dynamic(() => import('../../../components/CustomButton'), { ssr: false })
 import { useRouter } from 'next/router'
-const Comments = dynamic(() => import('../../../Components/Comments'))
-
+const Comments = dynamic(() => import('../../../components/Comments'), { ssr: false })
+import NoSSR from "@/components/SSRDisable"
 const BlogDetail = (props) => {
     const router = useRouter()
     const [edit, setEdit] = useState(true)
@@ -54,7 +54,7 @@ const BlogDetail = (props) => {
         }).then((res) => { return (alert('blog deleted successfully'), router.push("/blog/blogs")) }).catch((err) => { console.log('err') }) : ""
     }
     return (
-        <>
+        <NoSSR>
             <div className="container mx-auto mt-8 lg:px-10">
                 {(!editAccess && !edit) &&
                     <div className='flex w-full justify-end gap-2 items-center'>
@@ -115,7 +115,7 @@ const BlogDetail = (props) => {
 
                 {commentsArr[0] && <div><Comments CommentsArr={commentsArr} /></div>}
             </div>
-        </>
+        </NoSSR>
     )
 }
 
