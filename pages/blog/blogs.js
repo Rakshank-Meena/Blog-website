@@ -5,6 +5,7 @@ import NoSSR from "../../components/SSRDisable"
 const LazyLoader = dynamic(() => import('../../components/LazyLoader'), { ssr: false })
 const BlogList = dynamic(() => import('../../components/BlogList'), {
     loading: () => <LazyLoader />,
+    ssr:false
 })
 
 const BlogListing = (props) => {
